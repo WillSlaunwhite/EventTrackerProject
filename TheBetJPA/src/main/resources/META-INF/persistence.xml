@@ -4,6 +4,7 @@
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 		<class>com.skilldistillery.thebet.entities.User</class>
+		<class>com.skilldistillery.thebet.entities.Bet</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"

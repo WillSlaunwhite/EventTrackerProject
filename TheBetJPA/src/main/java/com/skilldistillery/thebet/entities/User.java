@@ -1,11 +1,13 @@
 package com.skilldistillery.thebet.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -14,8 +16,11 @@ public class User {
 	private int id;
 	private String name;
 	
+	@OneToMany(mappedBy="bettor")
+	private List<Bet> betsIssued;
 	
-	
+	@OneToMany(mappedBy="bettee")
+	private List<Bet> betsReceived;
 	
 	public User() { super(); }
 
@@ -24,8 +29,6 @@ public class User {
 		this.id = id;
 		this.name = name;
 	}
-
-
  
 
 	public int getId() {
