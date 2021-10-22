@@ -17,11 +17,8 @@ function init() {
 function getBet(betId) {
 	console.log('getBet(): betId is ' + betId);
 	let xhr = new XMLHttpRequest();
-	console.log('xhr.readyState = ' + xhr.readyState);
 	xhr.open('GET', 'api/bets/' + betId);
-	console.log('xhr.readyState = ' + xhr.readyState);
 	xhr.onreadystatechange = function() {
-		console.log('xhr.readyState = ' + xhr.readyState);
 		
 		if(xhr.readyState === 4) {
 			if(xhr.status === 200) {
@@ -34,9 +31,7 @@ function getBet(betId) {
 			}
 		}
 	}		
-	console.log('Before send: xhr.readyState = ' + xhr.readyState);
 	xhr.send();
-	console.log('After send: xhr.readyState = ' + xhr.readyState);
 }
 
 function displayBet(bet) {
@@ -68,10 +63,5 @@ function displayBet(bet) {
 	li = document.createElement('li');
 	li.textContent = bet.bettee.name;
 	betDiv.appendChild(li);
-	
-	
-	
-	// need to find a way to add bettor and bettee here. I'm not sure 
-	// if bet.bettee.name would work
 	
 }
