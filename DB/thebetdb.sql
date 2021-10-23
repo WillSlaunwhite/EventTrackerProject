@@ -23,7 +23,38 @@ DROP TABLE IF EXISTS `user` ;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bet`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bet` ;
+
+CREATE TABLE IF NOT EXISTS `bet` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `wager_date` DATE NULL,
+  `deadline_date` DATE NULL,
+  `wager` VARCHAR(1000) NULL,
+  `bettor_id` INT NOT NULL,
+  `bettee_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_bet_user_idx` (`bettor_id` ASC),
+  INDEX `fk_bet_user1_idx` (`bettee_id` ASC),
+  CONSTRAINT `fk_bet_user`
+    FOREIGN KEY (`bettor_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_bet_user1`
+    FOREIGN KEY (`bettee_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
@@ -36,3 +67,25 @@ GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE * TO 'thebetuser'@'localh
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `thebetdb`;
+INSERT INTO `user` (`id`, `name`, `username`, `password`) VALUES (1, 'Will Slaunwhite', 'willslaunwhite', 'will');
+INSERT INTO `user` (`id`, `name`, `username`, `password`) VALUES (2, 'Tyler Posey', 'tylerposey', 'tyler');
+INSERT INTO `user` (`id`, `name`, `username`, `password`) VALUES (DEFAULT, 'Eric Sheeder', 'ericsheeder', 'eric');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `bet`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `thebetdb`;
+INSERT INTO `bet` (`id`, `name`, `wager_date`, `deadline_date`, `wager`, `bettor_id`, `bettee_id`) VALUES (DEFAULT, 'Fast Food Bet', '2021-06-01', '2021-07-01', 'See who can go the longest without ordering fast food. Whoever loses owes the other $100', 3, 1);
+
+COMMIT;
+

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Bet {
 	@Id
@@ -26,10 +28,12 @@ public class Bet {
 	
 	private String wager;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="bettor_id")
 	private User bettor;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="bettee_id")
 	private User bettee;
