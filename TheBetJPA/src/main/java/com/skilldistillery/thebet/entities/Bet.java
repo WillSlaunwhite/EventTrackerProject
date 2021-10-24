@@ -27,12 +27,12 @@ public class Bet {
 	@Column(name="deadline_date")
 	private LocalDateTime deadlineDate;
 	
-	@JsonBackReference
+//	@JsonBackReference(value="bettor")
 	@ManyToOne
 	@JoinColumn(name="bettor_id")
 	private User bettor;
 	
-	@JsonBackReference
+//	@JsonBackReference(value="bettee")
 	@ManyToOne
 	@JoinColumn(name="bettee_id")
 	private User bettee;

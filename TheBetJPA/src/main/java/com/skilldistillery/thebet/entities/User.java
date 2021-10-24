@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class User {
@@ -20,11 +20,13 @@ public class User {
 	private String username;
 	private String password;
 	
-	@JsonManagedReference
+//	@JsonManagedReference(value="bettor")
+	@JsonBackReference(value="bettor")
 	@OneToMany(mappedBy="bettor")
 	private List<Bet> betsIssued;
 	
-	@JsonManagedReference
+//	@JsonManagedReference(value="bettee")
+	@JsonBackReference(value="bettee")
 	@OneToMany(mappedBy="bettee")
 	private List<Bet> betsReceived;
 	
@@ -72,7 +74,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 	public List<Bet> getBetsIssued() {
 		return betsIssued;
 	}
