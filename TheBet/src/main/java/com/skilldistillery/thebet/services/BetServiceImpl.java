@@ -8,11 +8,15 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.thebet.entities.Bet;
 import com.skilldistillery.thebet.repositories.BetRepository;
+import com.skilldistillery.thebet.repositories.UserRepository;
 
 @Service
 public class BetServiceImpl implements BetService {
 	@Autowired
 	private BetRepository betRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 	
 	@Override
 	public List<Bet> getAllBets() {
@@ -31,6 +35,8 @@ public class BetServiceImpl implements BetService {
 	
 	@Override
 	public Bet create(Bet bet) {
+		bet.setBettee(userRepo.findById(1).get());
+		bet.setBettor(userRepo.findById(3).get());
 		return betRepo.saveAndFlush(bet);
 	}
 	

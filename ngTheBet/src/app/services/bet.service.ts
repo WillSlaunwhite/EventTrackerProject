@@ -37,6 +37,8 @@ export class BetService {
     return this.http.post<Bet>(this.url, bet).pipe(
       catchError((err: any) => {
         console.log(err);
+        console.log(bet.wagerDate);
+        console.log(bet.deadlineDate);
         return throwError('betService.create(): error creating Bet');
       })
     );
