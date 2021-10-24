@@ -1,0 +1,50 @@
+<h1>Bets</h1>
+<ul>
+  <li *ngFor="let bet of bets">{{ bet.name }}</li>
+</ul>
+
+<div *ngIf='!selectedBet'>Issue New Bet<br>
+  Name <input type="text" name="betName" [(ngModel)]="newBet.name">
+  Wager <input type="text" name="wager" [(ngModel)]="newBet.wager">
+  Start Date <input type="date" name="startDate" [(ngModel)]="newBet.wagerDate">
+  Deadline <input type="date" name="endDate" [(ngModel)]="newBet.deadlineDate">
+  <!-- would like to put an option here to issue a bet to a specific user-->
+  <button class="btn btn-primary" type="submit" (click)="createBet(newBet)">Submit</button>
+</div>
+
+<div id="todoList" *ngIf="!selectedBet">
+  <label for="incompleteToggle">Show Completed Bets</label>
+  <input
+    type="checkbox"
+    id="incompleteToggle"
+    [(ngModel)]="showCompletedBets"
+  />
+  <table class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">The Wager</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Leave Bet</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bet of bets | incomplete: showCompletedBets">
+        <td style="width: 40%"(click)="displayBet(bet)">{{ bet.wager }}</td>
+        <td style="width: 10%">{{ bet.wagerDate | date: "shortDate" }}</td>
+        <td style="width: 10%">{{ bet.deadlineDate | date: "shortDate" }}</td>
+        <td style="width: 30%"><button class="btn-close" (click)="deleteBet(bet.id)"></button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="betDetails" *ngIf='selectedBet && !betToEdit'>
+  <p>#{{selectedBet.id}}</p>
+  <p>{{selectedBet.name}}</p>
+  <p>Wager: {{selectedBet.wager}}</p>
+  <p>Start Date: {{selectedBet.wagerDate | date: "shortDate"}}</p>
+  <p>Deadline: {{selectedBet.deadlineDate | date: "shortDate"}}</p>
+  <button (click)='hideBet()'>Back</button>
+  <button (click)="setBetToEdit()">Edit</button>
+</div>

@@ -17,16 +17,15 @@ public class Bet {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	
 	private String name;
+	private String wager;
+	private boolean completed;
 	
 	@Column(name="wager_date")
 	private LocalDateTime wagerDate;
 	
 	@Column(name="deadline_date")
 	private LocalDateTime deadlineDate;
-	
-	private String wager;
 	
 	@JsonBackReference
 	@ManyToOne
@@ -39,10 +38,26 @@ public class Bet {
 	private User bettee;
 	
 
+	
 
 	public Bet() { super(); }
 	
+	public Bet(int id, String name, String wager, boolean completed, LocalDateTime wagerDate,
+			LocalDateTime deadlineDate, User bettor, User bettee) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.wager = wager;
+		this.completed = completed;
+		this.wagerDate = wagerDate;
+		this.deadlineDate = deadlineDate;
+		this.bettor = bettor;
+		this.bettee = bettee;
+	}
+
 	
+
+
 	public int getId() {
 		return id;
 	}
@@ -99,6 +114,14 @@ public class Bet {
 		this.bettee = bettee;
 	}
 	
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `bet` (
   `wager_date` DATE NULL,
   `deadline_date` DATE NULL,
   `wager` VARCHAR(1000) NULL,
+  `completed` TINYINT(2) NULL,
   `bettor_id` INT NOT NULL,
   `bettee_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -85,7 +86,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `thebetdb`;
-INSERT INTO `bet` (`id`, `name`, `wager_date`, `deadline_date`, `wager`, `bettor_id`, `bettee_id`) VALUES (DEFAULT, 'Fast Food Bet', '2021-06-01', '2021-07-01', 'See who can go the longest without ordering fast food. Whoever loses owes the other $100', 3, 1);
+INSERT INTO `bet` (`id`, `name`, `wager_date`, `deadline_date`, `wager`, `completed`, `bettor_id`, `bettee_id`) VALUES (DEFAULT, 'Fast Food Bet', '2021-06-01', '2021-07-01', 'See who can go the longest without ordering fast food. Whoever loses owes the other $100', NULL, 3, 1);
 
 COMMIT;
 

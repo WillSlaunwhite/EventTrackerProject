@@ -23,4 +23,13 @@ export class UserService {
     );
   }
 
+  show(id: number): Observable<User> {
+    return this.http.get<User>(`${this.url}/${id}`).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError('UserService.show(): Error showing user');
+      }
+    ));
+  }
+
 }

@@ -28,6 +28,7 @@ public class User {
 	@OneToMany(mappedBy="bettee")
 	private List<Bet> betsReceived;
 	
+//	private List<Bet> bets;
 	
 	public User() { super(); }
 

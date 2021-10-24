@@ -7,20 +7,30 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http'
+import { BetService } from './services/bet.service';
+import { BetComponent } from './components/bet/bet.component';
+import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { IncompletePipe } from './pipes/incomplete.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserListComponent
+    UserListComponent,
+    BetComponent,
+    IncompletePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
-    UserService
+    UserService,
+    BetService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
