@@ -1,5 +1,5 @@
 html, body {
   height: 100vh;
   background-color: rgb(245, 176, 65) !important;
-  width: -12px;
+  margin-inline: -15px;
 }

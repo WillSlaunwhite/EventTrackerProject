@@ -35,12 +35,13 @@ public class BetServiceImpl implements BetService {
 	}
 	
 	@Override
+	@Override
 	public Bet create(String username, Bet bet) {
 		// THIS IS SUPER JANK need to find a better way to assign users 
 		// through either angular or something else
 		User user = userRepo.findByUsername(username);
 		if(user!=null) {
-			
+//			bet.setUser   need to set user info, but have two different users to set. will come back to this.
 		}
 		
 		bet.setBettee(userRepo.findById(1).get());
