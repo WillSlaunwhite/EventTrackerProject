@@ -19,13 +19,14 @@ public class User {
 	private String name;
 	private String username;
 	private String password;
+	private String email;
+	private boolean enabled;
+	private String role;
 	
-//	@JsonManagedReference(value="bettor")
 	@JsonBackReference(value="bettor")
 	@OneToMany(mappedBy="bettor")
 	private List<Bet> betsIssued;
 	
-//	@JsonManagedReference(value="bettee")
 	@JsonBackReference(value="bettee")
 	@OneToMany(mappedBy="bettee")
 	private List<Bet> betsReceived;
@@ -75,6 +76,30 @@ public class User {
 		this.password = password;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public List<Bet> getBetsIssued() {
 		return betsIssued;
 	}
@@ -111,9 +136,11 @@ public class User {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("User [id=").append(id).append(", name=").append(name).append("]");
+		builder.append("User [id=").append(id).append(", name=").append(name).append(", username=").append(username)
+				.append(", password=").append(password).append(", email=").append(email).append(", enabled=")
+				.append(enabled).append(", role=").append(role).append(", betsIssued=").append(betsIssued)
+				.append(", betsReceived=").append(betsReceived).append("]");
 		return builder.toString();
 	}
-	
-	
+
 }

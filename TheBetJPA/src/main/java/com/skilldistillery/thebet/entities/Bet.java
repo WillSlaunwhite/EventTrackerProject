@@ -1,7 +1,6 @@
 package com.skilldistillery.thebet.entities;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Bet {
@@ -23,19 +20,15 @@ public class Bet {
 	private boolean completed;
 	
 	@Column(name="wager_date")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private LocalDate wagerDate;
 	
 	@Column(name="deadline_date")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private LocalDate deadlineDate;
 	
-//	@JsonBackReference(value="bettor")
 	@ManyToOne
 	@JoinColumn(name="bettor_id")
 	private User bettor;
 	
-//	@JsonBackReference(value="bettee")
 	@ManyToOne
 	@JoinColumn(name="bettee_id")
 	private User bettee;

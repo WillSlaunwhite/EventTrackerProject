@@ -17,6 +17,7 @@
   <input
     type="checkbox"
     id="incompleteToggle"
+    name="incompleteToggle"
     [(ngModel)]="showCompletedBets"
   />
   <table class="table table-bordered table-striped table-hover">
@@ -47,4 +48,24 @@
   <p>Deadline: {{selectedBet.deadlineDate | date: "shortDate"}}</p>
   <button (click)='hideBet()'>Back</button>
   <button (click)="setBetToEdit()">Edit</button>
+</div>
+
+
+<div id="editBet" *ngIf="betToEdit">
+  <label for="name">Bet Name: </label>
+  <input type="text" name="name" [(ngModel)]="betToEdit.name"><br>
+
+  <label for="wager">Wager: </label>
+  <input type="text" name="wager" [(ngModel)]="betToEdit.wager"><br>
+
+  <label for="startDate">Start Date: </label>
+  <input type="date" name="startDate" [(ngModel)]="betToEdit.wagerDate"><br>
+
+  <label for="deadline">Deadline: </label>
+  <input type="date" name="deadline" [(ngModel)]="betToEdit.deadlineDate"><br>
+
+  <!-- would like to put an option here to change who the bet is between/add people to bet -->
+
+  <button class="btn btn-danger" (click)='betToEdit = null'>Cancel</button>
+  <button (click)='updateBet(betToEdit)'>Save</button>
 </div>

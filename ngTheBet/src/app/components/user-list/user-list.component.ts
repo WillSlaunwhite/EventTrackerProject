@@ -13,20 +13,24 @@ export class UserListComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.loadUsers();
+    // may need to come back to this later if I find I need
+    // a way to generate a list of users.
+
+    // I created this class during the setup/demo and ended up not needing it.
+
+    // this.loadUsers();
   }
 
-  loadUsers(){
-    this.userService.index().subscribe(
-      usersLoaded => {
-        this.users = usersLoaded;
-      },
-      fail => {
-        console.error('UserListComponent.index(): error loading users');
-        console.error(fail);
+  // loadUsers(){
+  //   this.userService.index().subscribe(
+  //     usersLoaded => {
+  //       this.users = usersLoaded;
+  //     },
+  //     fail => {
+  //       console.error('UserListComponent.loadUsers(): error loading users');
+  //       console.error(fail);
+  //     });
 
-      });
-
-  }
+  // }
 
 }

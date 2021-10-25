@@ -1,8 +1,11 @@
+import { Bet } from "./bet";
+
 export class User {
   id: number;
   name: string;
   username: string;
   password: string;
+  bets: Bet[] = [];
 
 
   constructor(

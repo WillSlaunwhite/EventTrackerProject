@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.thebet.entities.Bet;
+import com.skilldistillery.thebet.entities.User;
 import com.skilldistillery.thebet.repositories.BetRepository;
 import com.skilldistillery.thebet.repositories.UserRepository;
 
@@ -34,7 +35,14 @@ public class BetServiceImpl implements BetService {
 	}
 	
 	@Override
-	public Bet create(Bet bet) {
+	public Bet create(String username, Bet bet) {
+		// THIS IS SUPER JANK need to find a better way to assign users 
+		// through either angular or something else
+		User user = userRepo.findByUsername(username);
+		if(user!=null) {
+			
+		}
+		
 		bet.setBettee(userRepo.findById(1).get());
 		bet.setBettor(userRepo.findById(3).get());
 		return betRepo.saveAndFlush(bet);

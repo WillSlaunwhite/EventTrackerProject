@@ -1,5 +1,6 @@
 package com.skilldistillery.thebet.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,7 @@ public class BetController {
 	}
 	
 	@GetMapping("bets/{betId}")
-	public Bet getBet(@PathVariable Integer betId, HttpServletResponse resp) {
+	public Bet getBet(@PathVariable Integer betId, HttpServletResponse resp, Principal principal) {
 		Bet bet = betSvc.show(betId);
 		if(bet == null) {
 			resp.setStatus(404);
@@ -40,9 +41,9 @@ public class BetController {
 	}
 	
 	@PostMapping("bets")
-	public Bet addBet(@RequestBody Bet bet, HttpServletResponse resp, HttpServletRequest req) {
+	public Bet addBet(@RequestBody Bet bet, HttpServletResponse resp, HttpServletRequest req, Principal principal) {
 		try {
-			bet = betSvc.create(bet);
+			bet = betSvc.create(principal.getName(), bet);
 			resp.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(bet.getId());
@@ -56,12 +57,12 @@ public class BetController {
 	}
 	
 	@PutMapping("bets/{betId}")
-	public Bet updateBet(@PathVariable Integer betId, @RequestBody Bet bet) {
+	public Bet updateBet(@PathVariable Integer betId, @RequestBody Bet bet, Principal principal) {
 		return betSvc.update(betId, bet);
 	}
 	
 	@DeleteMapping("bets/{betId}")
-	public boolean deleteUser(@PathVariable Integer betId) {
+	public boolean deleteUser(@PathVariable Integer betId, Principal principal) {
 		return betSvc.delete(betId);
 	}
 }

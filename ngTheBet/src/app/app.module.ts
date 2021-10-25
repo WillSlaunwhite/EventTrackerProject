@@ -12,13 +12,23 @@ import { BetComponent } from './components/bet/bet.component';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { IncompletePipe } from './pipes/incomplete.pipe';
+import { HomeComponent } from './components/home/home.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
     BetComponent,
-    IncompletePipe
+    IncompletePipe,
+    HomeComponent,
+    NavigationComponent,
+    LoginComponent,
+    RegisterComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

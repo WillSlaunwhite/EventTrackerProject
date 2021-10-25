@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Bet } from 'src/app/models/bet';
+import { User } from 'src/app/models/user';
 import { BetService } from 'src/app/services/bet.service';
 
 @Component({
@@ -8,7 +10,11 @@ import { BetService } from 'src/app/services/bet.service';
   styleUrls: ['./bet.component.css'],
 })
 export class BetComponent implements OnInit {
-  constructor(private betService: BetService) {}
+  constructor(
+    private betService: BetService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   bets: Bet[] = [];
   selectedBet: Bet | null = null;
@@ -17,7 +23,23 @@ export class BetComponent implements OnInit {
   showCompletedBets = false;
 
   ngOnInit(): void {
-    this.loadBets();
+    if (!this.selectedBet && this.route.snapshot.paramMap.get('id')) {
+      this.betService.show(this.route.snapshot.params['id']).subscribe(
+        (success) => {
+          this.loadBets();
+          this.selectedBet = success;
+        },
+        (fail) => {
+          console.error(
+            'TodoListComponent.ngOnInit(): error initializing todo by id'
+          );
+          console.error(fail);
+          this.router.navigateByUrl('notfound');
+        }
+      );
+    } else {
+      this.loadBets();
+    }
   }
 
   loadBets() {
@@ -62,18 +84,16 @@ export class BetComponent implements OnInit {
 
   deleteBet(id: number): void {
     this.betService.destroy(id).subscribe(
-      deletedBet => {
+      (deletedBet) => {
         this.loadBets();
-        console.log('successfully deleted bet number ${id}');
-
+        console.log('successfully deleted bet number ' + String(id));
       },
-      failedToDelete => {
+      (failedToDelete) => {
         console.error('BetComponent.delete(): error deleting Bet');
         console.error(failedToDelete);
       }
     );
   }
-
 
   hideBet(): void {
     this.selectedBet = null;

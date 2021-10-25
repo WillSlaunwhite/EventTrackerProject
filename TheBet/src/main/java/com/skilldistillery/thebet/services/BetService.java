@@ -10,10 +10,10 @@ public interface BetService {
 
 	Bet update(int betId, Bet bet);
 
-	Bet create(Bet bet);
-
 	Bet show(int betId);
 
 	Boolean delete(int betId);
+
+	Bet create(String username, Bet bet);
 
 }
