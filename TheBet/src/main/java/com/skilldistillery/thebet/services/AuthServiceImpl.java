@@ -22,7 +22,7 @@ public class AuthServiceImpl implements AuthService {
 		// set other relevant verification fields
 		user.setPassword(encodedPW);
 		user.setEnabled(true);
-		user.setRole("standard");
+		user.setRole("user");
 		
 		// update the user in the database
 		userRepo.saveAndFlush(user);
