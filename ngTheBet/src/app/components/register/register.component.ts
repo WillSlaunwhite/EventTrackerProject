@@ -9,17 +9,17 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  constructor(private userSvc: UserService, private router: Router) { }
+  constructor(private auth: UserService, private router: Router) { }
 
   newUser: User = new User();
 
   register(user: User) {
     console.log('Registering user:');
     console.log(user);
-    this.userSvc.register(user).subscribe(
+    this.auth.register(user).subscribe(
       data => {
         console.log('RegisterComponent.register(): user registered.');
-        this.userSvc.login(user.username, user.password).subscribe(
+        this.auth.login(user.username, user.password).subscribe(
           next => {
             console.log('RegisterComponent.register(): user logged in, routing to /bets.');
             this.router.navigateByUrl('/bets');

@@ -4,15 +4,18 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { Bet } from '../models/bet';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BetService {
   constructor(private http: HttpClient, private datePipe: DatePipe) {}
+  // private baseUrl = 'http://localhost:8084/';
+  // private url = this.baseUrl + 'api/bets';
+  private baseUrl = environment.baseUrl;
+  private url = this.baseUrl + 'api/bets'
 
-  private baseUrl = 'http://localhost:8084/';
-  private url = this.baseUrl + 'api/bets';
 
   index(): Observable<Bet[]> {
     return this.http.get<Bet[]>(this.url).pipe(
