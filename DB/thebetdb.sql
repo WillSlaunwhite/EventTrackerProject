@@ -24,7 +24,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(45) NULL,
+  `enabled` TINYINT(4) NULL,
+  `role` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -74,9 +77,9 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `thebetdb`;
-INSERT INTO `user` (`id`, `name`, `username`, `password`) VALUES (1, 'Will Slaunwhite', 'willslaunwhite', 'will');
-INSERT INTO `user` (`id`, `name`, `username`, `password`) VALUES (2, 'Tyler Posey', 'tylerposey', 'tyler');
-INSERT INTO `user` (`id`, `name`, `username`, `password`) VALUES (DEFAULT, 'Eric Sheeder', 'ericsheeder', 'eric');
+INSERT INTO `user` (`id`, `name`, `username`, `password`, `email`, `enabled`, `role`) VALUES (1, 'Will Slaunwhite', 'willslaunwhite', 'will', NULL, NULL, 'admin');
+INSERT INTO `user` (`id`, `name`, `username`, `password`, `email`, `enabled`, `role`) VALUES (2, 'Tyler Posey', 'tylerposey', 'tyler', NULL, NULL, 'user');
+INSERT INTO `user` (`id`, `name`, `username`, `password`, `email`, `enabled`, `role`) VALUES (DEFAULT, 'Eric Sheeder', 'ericsheeder', 'eric', NULL, NULL, 'user');
 
 COMMIT;
 
@@ -86,7 +89,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `thebetdb`;
-INSERT INTO `bet` (`id`, `name`, `wager_date`, `deadline_date`, `wager`, `completed`, `bettor_id`, `bettee_id`) VALUES (DEFAULT, 'Fast Food Bet', '2021-06-01', '2021-07-01', 'See who can go the longest without ordering fast food. Whoever loses owes the other $100', NULL, 3, 1);
+INSERT INTO `bet` (`id`, `name`, `wager_date`, `deadline_date`, `wager`, `completed`, `bettor_id`, `bettee_id`) VALUES (DEFAULT, 'Fast Food Bet', '2021-06-01', '2021-07-01', 'See who can go the longest without ordering fast food. Whoever loses owes the other $100', 0, 3, 1);
 
 COMMIT;
 

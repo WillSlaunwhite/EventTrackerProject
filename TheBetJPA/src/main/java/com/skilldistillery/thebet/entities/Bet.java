@@ -33,6 +33,8 @@ public class Bet {
 	@JoinColumn(name="bettee_id")
 	private User bettee;
 	
+	// make unique repo methods to return bettors vs bettees
+	
 
 	
 
@@ -47,7 +49,11 @@ public class Bet {
 		this.completed = completed;
 		this.wagerDate = wagerDate;
 		this.deadlineDate = deadlineDate;
+		
+		if(bettor.getRole() == null) { bettor.setRole("user"); }
 		this.bettor = bettor;
+		
+		if(bettee.getRole() == null) { bettee.setRole("user"); }
 		this.bettee = bettee;
 	}
 
